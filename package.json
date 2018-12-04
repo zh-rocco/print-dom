@@ -1,0 +1,60 @@
+{
+  "name": "print-dom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "build": "webpack",
+    "build:docs": "rimraf docs &&",
+    "test": "cross-env NODE_ENV=test jest",
+    "deploy": "npm run test && npm run build:lib && npm run build:docs"
+  },
+  "files": [
+    "README.md",
+    "src",
+    "dist/*.js",
+    "types/*.d.ts"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zh-rocco/print-dom.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Rocco Mormont",
+    "email": "rocco.mormont@gmail.com",
+    "url": "https://zh-rocco.github.io/"
+  },
+  "bugs": {
+    "url": "https://github.com/zh-rocco/print-dom/issues"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-external-helpers": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/runtime": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.2.1",
+    "webpack": "^4.27.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "jest": {
+    "clearMocks": true,
+    "testURL": "http://localhost",
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/"
+    ],
+    "verbose": true
+  }
+}
