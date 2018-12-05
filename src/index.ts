@@ -4,12 +4,16 @@ function isFunction(f: any) {
   return Object.prototype.toString.call(f) === "[object Function]";
 }
 
+function isArray(a: any) {
+  return Object.prototype.toString.call(a) === "[object Array]";
+}
+
 export interface Options {
   noPrint?: string[];
   documentTitle?: string;
   style?: string;
   wrapClass?: string;
-  onPrintDialogClose?: Function;
+  onPrintDialogClose?: () => void;
 }
 
 export default class Print {
@@ -52,34 +56,36 @@ export default class Print {
   }
 
   private getStyle() {
-    const styles = document.querySelectorAll('link[rel="stylesheet"], style[type="text/css"]');
-    const styleList = Array.from(styles).map((style) => style.outerHTML);
+    const styles = document.querySelectorAll(`link[rel="stylesheet"], style[type="text/css"]`);
+    const styleList = Array.prototype.slice.call(styles).map((s: Element) => s.outerHTML);
     const { style } = this.options;
-    typeof style === "string" && styleList.push(style);
+    if (typeof style === "string") {
+      styleList.push(style);
+    }
     styleList.push(this.getNoPrintStyle());
     return styleList.join("");
   }
 
-  getNoPrintStyle() {
+  private getNoPrintStyle() {
     const { noPrint } = this.options;
-    if (Array.isArray(noPrint) && noPrint.length) {
-      return `<style type="text/css">${noPrint.join(", ")} { display: none; }</style>`;
+    if (isArray(noPrint) && noPrint!.length) {
+      return `<style type="text/css">${noPrint!.join(", ")} { display: none; }</style>`;
     } else {
       return "";
     }
   }
 
-  getTitle() {
+  private getTitle() {
     const { documentTitle } = this.options;
     return documentTitle ? `<title>${documentTitle}</title>` : "";
   }
 
-  getBody() {
+  private getBody() {
     const { wrapClass } = this.options;
     return `<body class="${wrapClass || ""}">${this.el.outerHTML}</body>`;
   }
 
-  writeIframe() {
+  private writeIframe() {
     const content = this.getHead() + this.getBody();
     const iframe = document.createElement("iframe");
     this.iframe = document.body.appendChild(iframe);
@@ -92,7 +98,7 @@ export default class Print {
     doc.close();
   }
 
-  print() {
+  private print() {
     this.printWindow.focus();
     this.printWindow.print();
     this.printWindow.close();
@@ -108,7 +114,7 @@ export default class Print {
     }, 0);
   }
 
-  destroy() {
+  private destroy() {
     this.el = null;
     this.iframe = null;
     this.printWindow = null;
