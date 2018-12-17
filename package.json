@@ -17,7 +17,12 @@
     "type": "git",
     "url": "https://github.com/zh-rocco/print-dom.git"
   },
-  "keywords": [],
+  "keywords": [
+    "print",
+    "print-js",
+    "print-dom",
+    "print-html"
+  ],
   "author": {
     "name": "Rocco Mormont",
     "email": "rocco.mormont@gmail.com",
