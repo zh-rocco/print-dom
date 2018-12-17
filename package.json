@@ -1,6 +1,6 @@
 {
   "name": "print-dom",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Lightweight and fast print library for browser.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
