@@ -15,6 +15,7 @@ export interface Options {
   documentTitle?: string;
   style?: string;
   wrapClass?: string;
+  processor?: (el: HTMLElement) => HTMLElement;
   onPrintDialogClose?: () => void;
 }
 
@@ -80,9 +81,14 @@ export default class Print {
   }
 
   private getBody() {
-    const { wrapClass } = this.options;
+    const { wrapClass, processor } = this.options;
+    let element = this.el;
+
+    if (isFunction(processor)) {
+      element = processor!(element);
+    }
     const classStr = wrapClass ? ` class="${wrapClass}"` : "";
-    return `<body${classStr}>${this.el.outerHTML}</body>`;
+    return `<body${classStr}>${element.outerHTML}</body>`;
   }
 
   private writeIframe() {
