@@ -18,11 +18,10 @@ export default class Print {
 
   constructor(el: HTMLElement, options: Options = {}) {
     if (el instanceof HTMLElement) {
-      return;
+      this.el = el;
+      this.options = shadowMerge({ noPrint: [".no-print"] }, options) as Options;
+      this.init();
     }
-    this.el = el;
-    this.options = shadowMerge({ noPrint: [".no-print"] }, options) as Options;
-    this.init();
   }
 
   private init() {

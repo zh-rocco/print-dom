@@ -11,4 +11,4 @@ export interface PrintDOM {
   (el: HTMLElement, options?: Options): void;
 }
 
-export default PrintDOM;
+export default function(el: HTMLElement, options?: Options): void;
