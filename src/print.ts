@@ -1,3 +1,6 @@
+import { shadowMerge } from "./helper";
+import { Options } from "../types/index";
+
 const IFRAME_STYLE = "position: absolute; top: 0; left: 0; width: 0; height: 0; border: none;";
 
 function isFunction(f: any) {
@@ -8,47 +11,22 @@ function isArray(a: any) {
   return Object.prototype.toString.call(a) === "[object Array]";
 }
 
-export type El = string | HTMLElement;
-
-export interface Options {
-  noPrint?: string[];
-  documentTitle?: string;
-  style?: string;
-  wrapClass?: string;
-  processor?: (el: HTMLElement) => HTMLElement;
-  onPrintDialogClose?: () => void;
-}
-
 export default class Print {
   private el!: HTMLElement;
   private options!: Options;
   private iframeWindow!: Window;
 
-  constructor(el: El, options: Options = {}) {
-    // not called with 'new'
-    if (!(this instanceof Print)) {
-      return new Print(el, options);
+  constructor(el: HTMLElement, options: Options = {}) {
+    if (el instanceof HTMLElement) {
+      return;
     }
-
-    const printElement = this.getPrintElement(el);
-
-    if (printElement instanceof HTMLElement) {
-      this.el = printElement;
-      this.options = Object.assign({ noPrint: [".no-print"] }, options);
-      this.init();
-    }
+    this.el = el;
+    this.options = shadowMerge({ noPrint: [".no-print"] }, options) as Options;
+    this.init();
   }
 
   private init() {
     this.writeIframe();
-  }
-
-  private getPrintElement(el: string | HTMLElement) {
-    if (typeof el === "string") {
-      return document.querySelector(el as string);
-    } else if (el instanceof HTMLElement) {
-      return el;
-    }
   }
 
   private getHead() {
@@ -82,10 +60,10 @@ export default class Print {
 
   private getBody() {
     const { wrapClass, processor } = this.options;
-    let element = this.el;
+    let element: HTMLElement = this.el;
 
     if (isFunction(processor)) {
-      element = processor!(element);
+      element = processor!(element.cloneNode(true) as HTMLElement);
     }
     const classStr = wrapClass ? ` class="${wrapClass}"` : "";
     return `<body${classStr}>${element.outerHTML}</body>`;
@@ -132,7 +110,6 @@ export default class Print {
 
   private destroy() {
     this.el = null!;
-    this.options = null!;
     this.iframeWindow = null!;
   }
 }

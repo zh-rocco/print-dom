@@ -1,6 +1,8 @@
-import Print, { El, Options } from "./print";
+import Print from "./print";
+import { PrintDOM } from "../types/index";
 
-export default function printDOM(el: El, options: Options = {}) {
-  // tslint:disable-next-line
-  new Print(el, options);
-}
+let printDOM: PrintDOM;
+// tslint:disable-next-line
+printDOM = (el, options) => new Print(el, options) && undefined;
+
+export default printDOM;
