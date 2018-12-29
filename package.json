@@ -1,6 +1,6 @@
 {
   "name": "print-dom",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Lightweight and fast print library for browser.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -11,7 +11,8 @@
   },
   "files": [
     "README.md",
-    "dist"
+    "dist",
+    "types"
   ],
   "repository": {
     "type": "git",
