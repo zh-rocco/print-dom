@@ -14,6 +14,7 @@ function isArray(a: any) {
 export default class Print {
   private el!: HTMLElement;
   private options!: Options;
+  private iframe!: HTMLIFrameElement;
   private iframeWindow!: Window;
 
   constructor(el: HTMLElement, options: Options = {}) {
@@ -21,6 +22,8 @@ export default class Print {
       this.el = el;
       this.options = shadowMerge({ noPrint: [".no-print"] }, options) as Options;
       this.init();
+    } else {
+      throw new TypeError(`expect "el" to be HTMLElement.`);
     }
   }
 
@@ -85,6 +88,7 @@ export default class Print {
     // 1. call print when iframe loaded;
     // 2. add onload event before calling doc.write().
     iframe.onload = () => this.print();
+    this.iframe = iframe;
     this.iframeWindow = (iframe.contentWindow || iframe.contentDocument) as Window;
     const content = this.getHead() + this.getBody();
     const doc = iframe.contentDocument || (iframe.contentWindow as Window).document;
@@ -109,6 +113,8 @@ export default class Print {
 
   private destroy() {
     this.el = null!;
+    this.iframe.onload = null;
+    this.iframe = null!;
     this.iframeWindow = null!;
   }
 }
