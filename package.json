@@ -1,7 +1,7 @@
 {
   "name": "print-dom",
-  "version": "1.2.3",
-  "description": "Lightweight and fast print library for browser.",
+  "version": "1.2.4",
+  "description": "Lightweight and fast print tool for browser.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
