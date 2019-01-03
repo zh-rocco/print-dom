@@ -19,7 +19,7 @@
 - Simple API.
 - Small bundle size: 3.8KB (1.54KB gzipped).
 - No dependencies.
-- Faster than [printJS](https://github.com/crabbly/Print.js/)
+- Faster than [print-js](https://github.com/crabbly/Print.js/)
 
 ## Installation
 
