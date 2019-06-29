@@ -8,7 +8,7 @@
 [![npm-version](https://img.shields.io/npm/v/print-dom.svg?maxAge=3600)](https://www.npmjs.com/package/print-dom)
 [![Github tag](https://img.shields.io/github/tag/zh-rocco/print-dom.svg?maxAge=3600)](https://github.com/zh-rocco/print-dom/)
 [![Build Status](https://travis-ci.org/zh-rocco/print-dom.svg?branch=master)](https://travis-ci.org/zh-rocco/print-dom)
-[![GitHub license](https://img.shields.io/github/license/zh-rocco/print-dom.svg)](https://github.com/zh-rocco/print-dom/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/zh-rocco/print-dom.svg)](https://github.com/zh-rocco/print-dom/blob/master/LICENSE) [![Greenkeeper badge](https://badges.greenkeeper.io/zh-rocco/print-dom.svg)](https://greenkeeper.io/)
 
 ## Demo
 
